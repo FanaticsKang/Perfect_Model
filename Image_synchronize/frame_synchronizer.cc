@@ -6,9 +6,14 @@ FrameSynchronizer::FrameSynchronizer(const double in_time_tol)
   frame_buffer_.resize(max_frame_sync_buffer_size);
 }
 
-void FrameSynchronizer::AddNewFrame(
-    ImageConstPtr frame_ptr, const int frame_index,
+bool FrameSynchronizer::AddNewFrame(
+    ImageConstPtr frame_ptr, const int &frame_index,
     std::shared_ptr<MultiFrame> *multiFrame_ptr) {
+  if(frame_ptr == nullptr){
+    std::cerr << "Input Pointer in FrameSynchronizer::AddNewFrame is null" 
+                << std::endl;
+    return false;
+  }
   double frame_stamp = frame_ptr->header.timestamp;
   int position;
   if (FindFrameByTime(frame_stamp, &position)) {
@@ -25,6 +30,7 @@ void FrameSynchronizer::AddNewFrame(
                                      frame_index);
   }
   *multiFrame_ptr = frame_buffer_[position];
+  return true;
 }
 
 bool FrameSynchronizer::FindFrameByTime(const double &timestamp,
@@ -44,4 +50,3 @@ bool FrameSynchronizer::FindFrameByTime(const double &timestamp,
   }
   return false;
 }
-

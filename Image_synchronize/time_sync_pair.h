@@ -12,6 +12,7 @@
 #include <utility>
 #include <vector>
 
+
 /**
  * @brief Use to Sync serveral Type. The size depends on buffer_size.
  *
@@ -41,7 +42,8 @@ class TimeSyncPair {
     }
     // Create a shared_ptr to avoid memory leak.
     std::shared_ptr<Type const> in_data_ptr(new Type(in_data));
-    return Insert(in_timestamp, in_data_ptr, data_index);
+    // Use setData function below to easy maintain
+    return setData(in_timestamp, in_data_ptr, data_index);
   };
   
   /**
@@ -53,6 +55,11 @@ class TimeSyncPair {
    * @return true if success.
    */
   bool setData(const double &in_timestamp, std::shared_ptr<Type const> in_data_ptr, const int &data_index) {
+    if(in_data_ptr == nullptr){
+      std::cerr << "Input Pointer in TimeSyncPair::setData is null" 
+                << std::endl;
+      return false;
+    }      
     if(IsLegal(in_timestamp, data_index) == false){
       return false;
     }    
