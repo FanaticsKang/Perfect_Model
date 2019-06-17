@@ -2,6 +2,5 @@
 build/
 bin/
 
-#ignore KDevelop
-.kdev4
-*.kdev4
+.*
+!.gitignore
