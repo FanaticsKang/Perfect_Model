@@ -45,4 +45,6 @@ set( CMAKE_CXX_FLAGS "-std=c++11 -O3" )
 
 #add_executable(xxx xxx.cc)
 #target_link_libraries( xxx ${XXX_LIBRARIES} )
+#Link Opencv
+#target_link_libraries( xxx ${OpenCV_LIBS})
 
