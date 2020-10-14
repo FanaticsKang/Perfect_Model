@@ -43,8 +43,8 @@ set( CMAKE_CXX_FLAGS "-std=c++11 -O3" )
 #Eigen
 #include_directories("/usr/include/eigen3")
 
-#add_executable(xxx xxx.cc)
+add_executable(${PROJECT_NAME} ${PROJECT_NAME}.cc)
 #target_link_libraries( xxx ${XXX_LIBRARIES} )
 #Link Opencv
-#target_link_libraries( xxx ${OpenCV_LIBS})
+#target_link_libraries(${PROJECT_NAME} ${OpenCV_LIBS})
 
